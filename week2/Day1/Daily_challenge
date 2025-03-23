@@ -1,0 +1,40 @@
+matrix_string = """7ii
+Tsx
+h%?
+i #
+sM 
+$a 
+#t%
+^r!"""
+
+def decrypt_matrix(matrix_str):
+    """Decrypts a matrix string and returns the hidden message."""
+
+    # Convert the matrix string to a 2D list (grid)
+    rows = matrix_str.split('\n')
+    cols = max(len(row) for row in rows)
+    matrix = [[' ' for _ in range(cols)] for _ in range(len(rows))]
+
+    for i, row in enumerate(rows):
+        for j, char in enumerate(row):
+            matrix[i][j] = char
+
+    # Read columns and extract alpha characters
+    decrypted_chars = []
+    for j in range(cols):
+        for i in range(len(rows)):
+            if matrix[i][j].isalpha():
+                decrypted_chars.append(matrix[i][j])
+
+    # Join alpha characters and replace symbols with spaces
+    decrypted_string = ''.join(decrypted_chars)
+
+    # Replace symbols between alpha characters with spaces
+    import re
+    decrypted_string = re.sub(r'[^\w\s]', ' ', decrypted_string)
+
+    return decrypted_string
+
+# Decrypt the matrix and print the result
+decrypted_message = decrypt_matrix(matrix_string)
+print(decrypted_message)
