@@ -1,0 +1,157 @@
+# exercice 1
+class Currency:
+    def __init__(self, currency, amount):
+        self.currency = currency
+        self.amount = amount
+
+    def __str__(self):
+        return f"{self.amount} {self.currency}s"
+
+    def __int__(self):
+        return self.amount
+
+    def __repr__(self):
+        return f"{self.amount} {self.currency}s"
+
+    def __add__(self, other):
+        if isinstance(other, Currency):
+            if self.currency != other.currency:
+                raise TypeError(f"Cannot add between Currency type {self.currency} and {other.currency}")
+            return Currency(self.currency, self.amount + other.amount)
+        elif isinstance(other, int):
+            return Currency(self.currency, self.amount + other)
+        else:
+            raise TypeError(f"Unsupported addition with type {type(other)}")
+
+    def __iadd__(self, other):
+        if isinstance(other, int):
+            self.amount += other
+            return self
+        elif isinstance(other, Currency):
+            if self.currency != other.currency:
+                raise TypeError(f"Cannot iadd between Currency type {self.currency} and {other.currency}")
+            self.amount += other.amount
+            return self
+        else:
+            raise TypeError(f"Unsupported iadd with type {type(other)}")
+
+# 💡 Exemple de test :
+c1 = Currency('dollar', 5)
+print(c1)         # 5 dollars
+print(int(c1))    # 5
+print(repr(c1))   # 5 dollars
+
+c2 = Currency('dollar', 10)
+print(c1 + c2)    # 15 dollars
+
+c1 += 5
+print(c1)         # 10 dollars
+
+c1 += Currency('dollar', 10)
+print(c1)         # 20 dollars
+
+# Provoque une erreur :
+# print(c1 + Currency('shekel', 5))  # TypeError attendu
+
+
+# 📄 math_operations.py
+
+def add(a, b):
+    return a + b
+
+
+# Colab : cette cellule permet de créer dynamiquement le fichier .py
+with open("math_operations.py", "w") as f:
+    f.write("def add(a, b):\n    return a + b\n")
+
+# ✅ Importer et tester
+from math_operations import add
+
+resultat = add(10, 5)
+print("Résultat de add(10, 5) :", resultat)
+
+
+import string
+import random
+
+# Alphabet
+print("Lettres minuscules :", string.ascii_lowercase)
+print("Lettres majuscules :", string.ascii_uppercase)
+
+# Générer une chaîne aléatoire de 10 lettres
+random_letters = ''.join(random.choice(string.ascii_letters) for _ in range(10))
+print("Chaîne aléatoire :", random_letters)
+
+
+# exercice 4 
+from datetime import datetime
+
+# Date et heure actuelles
+now = datetime.now()
+print("Date actuelle :", now.strftime("%Y-%m-%d"))
+print("Heure actuelle :", now.strftime("%H:%M:%S"))
+
+# exercice 5 
+
+from datetime import datetime
+
+def time_until_jan_1st():
+    now = datetime.now()
+    next_jan1 = datetime(year=now.year + 1, month=1, day=1)
+    delta = next_jan1 - now
+    
+    jours = delta.days
+    secondes_restantes = delta.seconds
+    heures = secondes_restantes // 3600
+    minutes = (secondes_restantes % 3600) // 60
+
+    print(f"Temps restant jusqu'au 1er janvier : {jours} jours, {heures} heures, {minutes} minutes.")
+
+# Appel de la fonction
+time_until_jan_1st()
+
+
+# exercice 6 
+
+from datetime import datetime
+
+def birthday_to_minutes(year, month, day):
+    birth_date = datetime(year=year, month=month, day=day)
+    now = datetime.now()
+    delta = now - birth_date
+    minutes = delta.total_seconds() // 60
+
+    print(f"Tu as vécu environ {int(minutes):,} minutes.")
+
+# Exemple (à remplacer par ta vraie date de naissance)
+birthday_to_minutes(1998, 7, 12)
+
+
+# exercice 7 
+
+!pip install faker --quiet
+
+from faker import Faker
+
+def generate_fake_users(n):
+    fake = Faker()
+    users = []
+
+    for _ in range(n):
+        user = {
+            "nom": fake.name(),
+            "email": fake.email(),
+            "adresse": fake.address(),
+            "pays": fake.country()
+        }
+        users.append(user)
+    
+    return users
+
+# Générer 5 faux utilisateurs
+fake_users = generate_fake_users(5)
+
+# Afficher proprement
+import pandas as pd
+df_fake = pd.DataFrame(fake_users)
+print(df_fake)
