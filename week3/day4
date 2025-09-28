@@ -1,0 +1,165 @@
+# DAILY CHALLENGE – CIRCLE (OOP + DUNDER METHODS)
+
+import math
+
+class Circle:
+    def __init__(self, *, radius=None, diameter=None):
+        if radius is not None:
+            self.radius = radius
+        elif diameter is not None:
+            self.radius = diameter / 2
+        else:
+            raise ValueError("You must provide either radius or diameter.")
+
+    @property
+    def diameter(self):
+        return self.radius * 2
+
+    @property
+    def area(self):
+        return round(math.pi * self.radius ** 2, 2)
+
+    def __str__(self):
+        return f"Circle(radius={self.radius})"
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __add__(self, other):
+        if isinstance(other, Circle):
+            return Circle(radius=self.radius + other.radius)
+        raise TypeError("You can only add Circle to Circle")
+
+    def __eq__(self, other):
+        return isinstance(other, Circle) and self.radius == other.radius
+
+    def __gt__(self, other):
+        return isinstance(other, Circle) and self.radius > other.radius
+
+    def __lt__(self, other):
+        return isinstance(other, Circle) and self.radius < other.radius
+
+# ✅ Tests basiques
+c1 = Circle(radius=5)
+c2 = Circle(diameter=20)
+
+print(c1)              # Circle(radius=5)
+print("Diamètre :", c1.diameter)    # 10
+print("Aire :", c1.area)            # ~78.54
+
+# ✅ Addition
+c3 = c1 + c2
+print("Cercle combiné :", c3)       # radius=5 + 10 = 15
+
+# ✅ Comparaison
+print("c1 == c2 ?", c1 == c2)       # False
+print("c2 > c1 ?", c2 > c1)         # True
+
+# ✅ Liste triée
+cercles = [c1, c2, c3]
+cercles.sort()
+print("Triés :", cercles)           # triés par rayon
+
+# BONUS : dessin avec turtle (facultatif)
+try:
+    import turtle
+
+    def draw_circle(circle: Circle):
+        t = turtle.Turtle()
+        t.circle(circle.radius * 10)  # multiplier pour bien voir
+        t.hideturtle()
+
+    turtle.bgcolor("white")
+    turtle.title("Cercles triés")
+    for c in cercles:
+        draw_circle(c)
+    turtle.done()
+except ImportError:
+    print("Module turtle non disponible ici.")
+
+
+# BONUS désactivé : turtle ne fonctionne pas dans Colab ou environnements sans GUI
+try:
+    import turtle
+
+    def draw_circle(circle: Circle):
+        t = turtle.Turtle()
+        t.circle(circle.radius * 10)  # multiplier pour bien voir
+        t.hideturtle()
+
+    turtle.bgcolor("white")
+    turtle.title("Cercles triés")
+    for c in cercles:
+        draw_circle(c)
+    turtle.done()
+
+except Exception as e:
+    print("Turtle non disponible ici :", e)
+
+
+import math
+import matplotlib.pyplot as plt
+
+class Circle:
+    def __init__(self, *, radius=None, diameter=None):
+        if radius is not None:
+            self.radius = radius
+        elif diameter is not None:
+            self.radius = diameter / 2
+        else:
+            raise ValueError("You must provide either radius or diameter.")
+
+    @property
+    def diameter(self):
+        return self.radius * 2
+
+    @property
+    def area(self):
+        return round(math.pi * self.radius ** 2, 2)
+
+    def __str__(self):
+        return f"Circle(radius={self.radius})"
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __add__(self, other):
+        if isinstance(other, Circle):
+            return Circle(radius=self.radius + other.radius)
+        raise TypeError("You can only add Circle to Circle")
+
+    def __eq__(self, other):
+        return isinstance(other, Circle) and self.radius == other.radius
+
+    def __gt__(self, other):
+        return isinstance(other, Circle) and self.radius > other.radius
+
+    def __lt__(self, other):
+        return isinstance(other, Circle) and self.radius < other.radius
+
+# 🔍 Tests
+c1 = Circle(radius=5)
+c2 = Circle(diameter=20)
+c3
+
+
+def plot_circles(circles):
+    fig, ax = plt.subplots()
+    ax.set_aspect('equal')
+    
+    colors = ['skyblue', 'lightgreen', 'salmon', 'orange', 'violet']
+    
+    for i, circle in enumerate(circles):
+        c = plt.Circle((i * 2.5, 0), circle.radius, color=colors[i % len(colors)], alpha=0.6)
+        ax.add_patch(c)
+        ax.text(i * 2.5, 0, f"{circle.radius}", fontsize=10, ha='center', va='center')
+    
+    # Ajuster les limites
+    ax.set_xlim(-1, len(circles)*2.5)
+    ax.set_ylim(-max(c.radius for c in circles) - 1, max(c.radius for c in circles) + 1)
+    plt.title("Visualisation des cercles (triés par rayon)")
+    plt.grid(True)
+    plt.show()
+
+# Afficher
+plot_circles(cercles)
