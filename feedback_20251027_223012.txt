@@ -1,0 +1,10 @@
+URL: https://github.com/ilansarbac95/DI158/blob/main/Data_Analytics_Bootcamp_Part_Time_2025_Databases_%26_Hackathon_Python_and_Database_Daily_challenge_Web_API_to_DB.ipynb
+suggestions for improvement:
+- Consider using more descriptive variable names for better readability.
+- The code currently uses an in-memory database. If persistence is needed, you could modify the connection string to point to a file-based SQLite database.
+Brief justification:
+- correctness: The code accurately fetches data from the specified REST Countries API, selects 10 random countries, and populates a SQLite database with the requested attributes: name, capital, flag, subregion, and population, which directly aligns with the challenge's requirements.
+- readability: The code is well-structured and includes comments, which improves readability. However, some variable names could be more descriptive. The use of French comments might limit readability for some users.
+- performance: The code's performance is adequate for the given task. Fetching data from the API and inserting 10 records into an in-memory database is relatively fast. Using executemany could potentially improve insert performance with a larger dataset, but is not necessary here.
+- security: The code uses parameterized queries, which prevents SQL injection vulnerabilities. Storing the database in memory makes it volatile, removing any persistent security concerns in this context.
+
