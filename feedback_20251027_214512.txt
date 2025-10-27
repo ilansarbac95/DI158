@@ -1,0 +1,11 @@
+URL: https://github.com/ilansarbac95/DI158/blob/main/Data_Analytics_Bootcamp_Part_Time_2025_Databases_Introduction_to_Databases_Exercise_XP_%2B.ipynb
+suggestions for improvement:
+- The code uses an in-memory SQLite database. While suitable for testing, the instructions mention using a database named 'bootcamp', suggesting a persistent database instance is intended. Consider using a persistent SQLite database or another database system like PostgreSQL as the exercise seems tailored toward using SQL.
+- The code includes the `id` in the INSERT statement, even though it's set to AUTOINCREMENT. While it works, it's cleaner to omit the `id` column in the INSERT statement to allow the database to manage it automatically.
+- The problem asks to insert your own information, but the solution doesn't include the insertion of that data, so I recommend including the insertion of that data.
+Brief justification:
+- correctness: The code correctly creates the table, inserts the provided data, and performs all the required SELECT queries according to the exercise instructions. Minor improvements could be made regarding the database type and how the auto-incremented id is handled during insertion. Omitting to insert your own information in the table is a miss too.
+- readability: The code is well-structured and includes comments that explain each step, making it easy to understand. The use of descriptive variable names also contributes to readability.
+- performance: The performance is good for this small dataset. The use of `executemany` for inserting multiple records is efficient.
+- security: The code appears to be secure as it doesn't involve any external input or potentially dangerous operations. The use of parameterized queries with `executemany` helps prevent SQL injection.
+
