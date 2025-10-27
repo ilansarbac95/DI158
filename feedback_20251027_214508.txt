@@ -1,0 +1,11 @@
+URL: https://github.com/ilansarbac95/DI158/blob/main/Data_Analytics_Bootcamp_Part_Time_2025_Databases_Introduction_to_Databases_Exercise_XP.ipynb
+suggestions for improvement:
+- The code uses an in-memory SQLite database instead of creating a `public` database as requested in the exercise. Consider using a PostgreSQL database to align with the implied context of the pgAdmin instructions.
+- The code only implements three out of the six requested SQL queries. It is missing queries for items with price below 300, customers with last name 'Smith', and customers with last name 'Jones'.
+- The code prints the results of the queries to the console. While this is acceptable, ideally it would store these results or perform further operations based on them.
+Brief justification:
+- correctness: The code correctly creates the tables and inserts the data as described in the exercise. However, it deviates by using SQLite and an in-memory database instead of PostgreSQL. More importantly, it only implements 3 of the 6 required SQL queries, missing key parts of the exercise. Thus, the correctness score is 70%.
+- readability: The code is well-structured and easy to follow. Comments explain each step, improving readability. Variable names are descriptive. Overall, readability is good, meriting a score of 80%.
+- performance: For such a small dataset, performance is not a major concern. The queries are simple and efficient. Using executemany for insertion is a good practice. A score of 90% is appropriate.
+- security: The code uses parameterized queries via executemany, which prevents SQL injection. Since the data is hardcoded, there isn't much risk of external input affecting security. Score: 90%.
+
