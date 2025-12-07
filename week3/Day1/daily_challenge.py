@@ -4,10 +4,12 @@ class Pagination:
     def __init__(self, items=None, pageSize=10):
         self.items = items or []
         self.pageSize = int(pageSize)
-        self.totalPages = math.ceil(len(self.items) / self.pageSize) if self.items else 1
+        self.totalPages = math.ceil(len(self.items) / self.pageSize) if self.items else 0
         self.currentPage = 1
 
     def getVisibleItems(self):
+        if not self.items:
+            return []
         start = (self.currentPage - 1) * self.pageSize
         end = start + self.pageSize
         return self.items[start:end]
@@ -31,26 +33,4 @@ class Pagination:
     def goToPage(self, pageNum):
         self.currentPage = max(1, min(self.totalPages, int(pageNum)))
         return self
-
-alphabetList = list("abcdefghijklmnopqrstuvwxyz")
-p = Pagination(alphabetList, 4)
-
-print(p.getVisibleItems())  # ["a", "b", "c", "d"]
-
-p.nextPage()
-print(p.getVisibleItems())  # ["e", "f", "g", "h"]
-
-p.lastPage()
-print(p.getVisibleItems())  # ["y", "z"]
-
-p.goToPage(10)
-print(p.getVisibleItems()) # ["y", "z"]
-
-p.goToPage(-1)
-print(p.getVisibleItems()) # ["a", "b", "c", "d"]
-
-p.goToPage(5.5)
-print(p.getVisibleItems()) # ["u", "v", "w", "x"]
-
-p.nextPage().nextPage()
-print(p.getVisibleItems()) # ["y", "z"]
+    
