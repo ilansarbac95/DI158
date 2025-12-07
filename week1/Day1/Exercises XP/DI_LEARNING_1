@@ -1,0 +1,58 @@
+#exercice 1
+print("Hello world\nHello world\nHello world\nHello world")
+
+#exercice 2
+result = (99 ** 3)*8
+print(result)
+
+#exercice 3
+print(5 < 3) #False
+print(3 == 3) #True
+print(3 == "3") #False
+#print("3" > 3) #Typer Error
+print("Hello" == "hello") #False
+
+#exerice 4
+computer_brand = "MacOS"
+print(f"I have a {computer_brand} computer")
+
+#exercice 5
+name = "ilan"
+age = 35
+shoe_size = 43
+info = "left-handed"
+print(f"Hello, I am {name} , {age} years old, I love my big feet {shoe_size} and I am {info}")
+
+#exercice 6
+a = 15 
+b = 3
+
+if a > b:
+    print("Hello World")
+else: 
+    print("Hello Teletubbies")
+
+#exerice 7
+number = int(input("Type a number : "))
+
+if number % 2 == 0:
+    print("Odd")
+else:
+    print("Even")
+
+#exercice 8
+your_name = input("What is your name: ")
+my_name = "Ilan"
+
+if your_name == my_name:
+    print("Wow, we are like a tree")
+else:
+    print("If your name were Ilan like pme it would be so cool")
+
+#exercice 9
+height = int(input("What is your height: "))
+
+if height > 145:
+    print("Awesome you can go to the Rollercoaster tycoon")
+else:
+    print("Get out of my face, little fellow.")

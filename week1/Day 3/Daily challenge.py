@@ -1,0 +1,42 @@
+#Challenge 1 
+
+def multiples_of_number():
+    """
+    Ask to the USer to enter a number and a length then display a multiple list.
+    """
+    try:
+        number = int(input("Entrer a number : "))
+        length = int(input("Enter a length to the lsit : "))
+
+        multiples = []
+        current_multiple = number
+        while len(multiples) < length:
+            multiples.append(current_multiple)
+            current_multiple += number
+
+        print(multiples)
+
+    except ValueError:
+        print("Please enter only integers.")
+
+multiples_of_number()
+
+
+#Challenge 2
+
+def remove_consecutive_duplicates():
+    """
+    Asks the user for a string of characters and displays a new string without duplicate consecutive letters.
+    """
+    word = input("Enter a string of characters: ")
+    result = ""
+    prev_char = None
+
+    for char in word:
+        if char != prev_char:
+            result += char
+            prev_char = char
+
+    print(result)
+
+remove_consecutive_duplicates()
